@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20160305174852) do
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255,              null: false
     t.string   "avatar",                 limit: 255
-    t.integer  "type",                   limit: 4,   default: 0,  null: false
+    t.integer  "account_type",           limit: 4,   default: 0,  null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
