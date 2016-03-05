@@ -11,7 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305174852) do
+ActiveRecord::Schema.define(version: 20160305204459) do
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string   "name",         limit: 255,             null: false
+    t.string   "cover_photo",  limit: 255
+    t.string   "photo",        limit: 255
+    t.integer  "views",        limit: 4,   default: 0
+    t.integer  "duration",     limit: 4
+    t.datetime "release_date"
+    t.integer  "genre_id",     limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "user_movies", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,             null: false
+    t.integer  "movie_id",   limit: 4,             null: false
+    t.integer  "state",      limit: 4, default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255,              null: false

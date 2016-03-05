@@ -4,6 +4,12 @@ FactoryGirl.define do
     password "1234567890"
     name "testing dude"
     account_type "user"
+
+    trait :with_movie do
+      after(:create) do |user|
+        user.movies << create(:movie)
+      end
+    end
   end
   
   factory :admin, class: "User" do
