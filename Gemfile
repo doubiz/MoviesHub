@@ -12,6 +12,7 @@ gem 'mysql2'
 
 #Authentication
 gem 'devise'
+gem 'tiddle'
 
 #Testing
 group :development, :test do
