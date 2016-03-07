@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   ##Devise 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :token_authenticatable
 
   ##Enum for different account types
   enum account_type: {user: 0, admin: 1}
@@ -15,4 +16,5 @@ class User < ActiveRecord::Base
   has_many :not_watched_movies, -> {where(user_movies: {state: 0})}, through: :user_movies, source: :user
   has_many :liked_movies, -> {where(user_movies: {state: 1})}, through: :user_movies, source: :user
   has_many :disliked_movies, -> {where(user_movies: {state: 2})}, through: :user_movies, source: :user
+  has_many :authentication_tokens
 end
