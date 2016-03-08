@@ -21,14 +21,14 @@ RSpec.describe Api::V1::MoviesController, type: :request do
   describe "POST #create" do
     it "creates a new movie" do
       expect{
-        post_with_token "/api/v1/movies", movie: FactoryGirl.attributes_for(:movie)
+        post_with_token :admin, "/api/v1/movies", movie: FactoryGirl.attributes_for(:movie)
       }.to change(Movie,:count).by(1)
     end
   end
 
   describe "PUT #update" do
     it "updates a movie" do
-      put_with_token "/api/v1/movies/#{movie.id}", 
+      put_with_token :admin, "/api/v1/movies/#{movie.id}", 
         movie: FactoryGirl.attributes_for(:movie, name: "Super test")
       movie.reload
       expect(movie.name).to eq("Super test")
@@ -39,10 +39,8 @@ RSpec.describe Api::V1::MoviesController, type: :request do
     it "deletes a movie" do
       movie = FactoryGirl.create(:movie)
       expect{
-        delete_with_token "/api/v1/movies/#{movie.id}"
+        delete_with_token :admin, "/api/v1/movies/#{movie.id}"
       }.to change(Movie,:count).by(-1)
     end
   end
-
-
 end

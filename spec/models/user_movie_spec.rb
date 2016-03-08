@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe UserMovie, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user_movie) {FactoryGirl.create(:user_with_movie).user_movies.first}
+
+  describe "Relations" do 
+    it{expect(user_movie).to belong_to(:movie)}
+    it{expect(user_movie).to belong_to(:user)}
+  end
 end

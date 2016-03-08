@@ -14,6 +14,9 @@ gem 'mysql2'
 gem 'devise'
 gem 'tiddle'
 
+#Authorization
+gem 'cancancan'
+
 #Testing
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
