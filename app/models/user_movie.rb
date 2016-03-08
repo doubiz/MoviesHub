@@ -1,5 +1,4 @@
 class UserMovie < ActiveRecord::Base
-
   ##Enum
   enum state: {not_watched: 0, liked: 1, disliked: 2}
 
