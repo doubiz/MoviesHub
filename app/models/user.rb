@@ -17,4 +17,5 @@ class User < ActiveRecord::Base
   has_many :liked_movies, -> {where(user_movies: {state: 1})}, through: :user_movies, source: :user
   has_many :disliked_movies, -> {where(user_movies: {state: 2})}, through: :user_movies, source: :user
   has_many :authentication_tokens
+  has_many :ratings
 end

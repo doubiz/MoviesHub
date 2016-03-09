@@ -3,8 +3,8 @@ class Api::V1::MoviesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @movies = Movie.all
-    render json: @movies
+    @movies = Movie.all.includes(:ratings)
+    render json: @movies.to_json(methods: :rating)
   end
 
   def create
@@ -14,7 +14,7 @@ class Api::V1::MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    render json: @movie
+    render json: @movie.to_json(methods: :rating)
   end
 
   def update
