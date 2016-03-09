@@ -10,4 +10,9 @@ RSpec.describe Movie, type: :model do
   describe "Relations" do
     it{expect(movie).to belong_to(:genre)}
   end
+
+  describe "Rating" do
+    let(:movie_with_ratings) {FactoryGirl.create(:movie_with_ratings)}
+    it {expect(movie_with_ratings.rating).to eq(3.0)}
+  end
 end

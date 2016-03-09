@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306193647) do
+ActiveRecord::Schema.define(version: 20160308213431) do
 
   create_table "authentication_tokens", force: :cascade do |t|
     t.string   "body",         limit: 255
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20160306193647) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "movie_id",   limit: 4, null: false
+    t.integer  "value",      limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "ratings", ["user_id", "movie_id"], name: "index_ratings_on_user_id_and_movie_id", using: :btree
 
   create_table "user_movies", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,             null: false
