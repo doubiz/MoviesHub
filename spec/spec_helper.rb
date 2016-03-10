@@ -40,6 +40,13 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  ## Deleting file uploads after testing
+  config.after(:each) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
+    end 
+  end
+
 
   # config.include Requests::JsonHelpers, type: :controller
 # The settings below are suggested to provide a good initial experience
