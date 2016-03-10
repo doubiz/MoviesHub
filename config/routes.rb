@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :movies
       namespace :movies do
         resources :ratings, only: [:create, :update, :destroy]
+        resources :user_movies, only: [:index, :create, :update, :destroy]
       end
       resources :genres
     end

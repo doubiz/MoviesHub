@@ -7,8 +7,8 @@ RSpec.describe Rating, type: :model do
   
   describe "Validations" do
     #Basic validations
-    it {expect(rating).to validate_presence_of(:user_id)}
-    it {expect(rating).to validate_presence_of(:movie_id)}
+    it {expect(rating).to validate_presence_of(:user)}
+    it {expect(rating).to validate_presence_of(:movie)}
     it {expect(rating).to validate_presence_of(:value)}
 
     #Uniquniess validations

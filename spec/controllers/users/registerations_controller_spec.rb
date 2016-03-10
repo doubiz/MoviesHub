@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Users::RegistrationsController, type: :request do
 
   describe "POST #create" do
-
     it "should create a user" do
       post "/api/v1/users", user: FactoryGirl.attributes_for(:user)
       expect(response.status).to eq(200)

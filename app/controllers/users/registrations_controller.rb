@@ -6,12 +6,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       token = Tiddle.create_and_return_token(resource, request)
       render json: { user: resource, authentication_token: token }.to_json
     else
-      render json: resource.errors.to_json
+      render json: resource.errors.to_json, status: 500
     end
   end
 
   def update
-    render json: update_resource(current_user, account_update_params) ? current_user.to_json : current_user.errors.to_json
+    if update_resource(current_user, account_update_params)
+      render json: current_user.to_json
+    else
+      render json: current_user.errors.to_json, status: 500
+    end
   end
 
   private
