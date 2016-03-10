@@ -1,5 +1,6 @@
 class Api::V1::GenresController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :prepare_genre, only: [:update, :destroy]
   load_and_authorize_resource
 
   def index
@@ -8,17 +9,23 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def create
-    @genre = Genre.create(genre_params)
-    render json: @genre ? @genre.to_json : @genre.errors.to_json
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      render json: @genre.to_json
+    else
+      render json: @genre.errors.to_json, status: 500
+    end
   end
 
   def update
-    @genre = Genre.find(params[:id])
-    render json: @genre.update(genre_params) ? @genre.to_json : @genre.errors.to_json
+    if @genre.update(genre_params)
+      render json: @genre.to_json
+    else
+      render json: @genre.errors.to_json, status: 500
+    end
   end
 
   def destroy
-    @genre = Genre.find(params[:id])
     render json: @genre.destroy
   end
 
@@ -26,5 +33,12 @@ class Api::V1::GenresController < ApplicationController
 
   def genre_params
     params.require(:genre).permit(:name)
+  end
+
+  def prepare_genre
+    @genre = Genre.find(params[:id])
+    unless @genre.present?
+      render json: "Genre doesn't exist", status: 404
+    end
   end
 end

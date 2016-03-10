@@ -6,7 +6,7 @@ class Movie < ActiveRecord::Base
   mount_uploader :cover_photo, Movies::CoverPhotoUploader
 
   ##Validations
-  validates_presence_of :name
+  validates_presence_of :name, :genre
 
   ##Relations
   belongs_to :genre
