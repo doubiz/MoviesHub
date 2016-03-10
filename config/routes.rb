@@ -9,5 +9,5 @@ Rails.application.routes.draw do
       resources :genres
     end
   end
-  devise_for :users, controllers: { sessions: "users/sessions" }, path_prefix: "api/:version"
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }, path_prefix: "api/:version"
 end

@@ -24,6 +24,20 @@ RSpec.describe Api::V1::MoviesController, type: :request do
         post_with_token :admin, "/api/v1/movies", movie: FactoryGirl.attributes_for(:movie)
       }.to change(Movie,:count).by(1)
     end
+
+    it "create a new movie with photo links" do
+      post_with_token :admin, "/api/v1/movies", movie: FactoryGirl.attributes_for(:movie_with_link_photos)
+      res = JSON.parse(response.body)
+      expect(res["cover_photo"]["url"]).to_not be_nil
+      expect(res["photo"]["url"]).to_not be_nil
+    end
+
+    it "create a new movie with photo files" do
+      post_with_token :admin, "/api/v1/movies", movie: FactoryGirl.attributes_for(:movie_with_photos)
+      res = JSON.parse(response.body)
+      expect(res["cover_photo"]["url"]).to_not be_nil
+      expect(res["photo"]["url"]).to_not be_nil
+    end
   end
 
   describe "PUT #update" do

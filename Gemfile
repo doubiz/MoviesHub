@@ -17,6 +17,9 @@ gem 'tiddle'
 #Authorization
 gem 'cancancan'
 
+#Image uploaders
+gem 'carrierwave'
+
 #Testing
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

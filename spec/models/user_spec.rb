@@ -20,5 +20,19 @@ RSpec.describe User, type: :model do
     it {expect(user).to have_many(:not_watched_movies)}
     it {expect(user).to have_many(:liked_movies)}
     it {expect(user).to have_many(:disliked_movies)}
-  end 
+  end
+
+  describe "Avatar uploading" do
+    it "allows uploading avatar via links" do
+      user.avatar_url = "https://www.google.com.eg/images/nav_logo242.png"
+      user.save
+      expect(user.avatar.file).to_not be_nil
+    end
+
+    it "allows uploading avatar via files" do
+      user.avatar = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images','test.png'))
+      user.save
+      expect(user.avatar.file).to_not be_nil
+    end
+  end
 end
